@@ -1,6 +1,7 @@
-# Framework for Conway's game of life
-# Daniel Neumann
-# CIS 125 FA2104
+#Jacob Wright
+#Intro to Computer Science
+#Week 7 assignment
+#Collaborated with Daniel McMurry, Marissa Gross, Evan Sauers
 
 # Functions
 # populate()
@@ -23,7 +24,15 @@ def populate(petri_dish, h=80, w=22):
     for x in range(h):
             row = []
             for y in range(w):
-                    row.append(random.randint(0, 1))
+                    row.append(0)
+            petri_dish.append(row)
+            
+def rpopulate(petri_dish, h=80, w=22):
+    import random
+    for x in range(h):
+            row = []
+            for y in range (w):
+                   row.append(random.randint(0,1))
             petri_dish.append(row)
 
 # Function display(world,h,w)
@@ -76,27 +85,27 @@ def generation(petri_dish, h=22, w=80):
             if petri_dish[x][y] == 0:
                 if n == 3:
                     new_world[x][y] = 1
-            #else:
-                #new_world[x][y] = 0
+                else:
+                   new_world[x][y] = 0
             else: #(cell is alive)
                 if n < 2 or n > 3:
                     new_world[x][y] = 0
-            # else:
-                #new_world[x][y] = 1
+                else:
+                    new_world[x][y] = 1
     
-    print(new_world)
-    petri_dish = new_world
+   
+    return new_world
 
 
 def main():
     world = []
     height = 22
     width = 80
-    populate(world, height, width)
+    rpopulate(world, height, width)
     display(world, height, width)
     key = input("Press q to quit, any other key to continue: ")
     while key != 'q':
-        generation(world, height, width)
+        world = generation(world, height, width)
         display(world, height, width)
         key = input("Press q to quit, any other key to continue: ")
 
